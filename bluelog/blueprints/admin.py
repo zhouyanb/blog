@@ -78,7 +78,7 @@ def  delete_post(post_id):
     flash('Post deleted','success')
     return redirect_back()
 
-@admin_bp.route('/set-comment/<int:post_id>')
+@admin_bp.route('/set-comment/<int:post_id>',methods=['GET','POST'])
 @login_required
 def set_comment(post_id):
     post=Post.query.get_or_404(post_id)
@@ -89,7 +89,7 @@ def set_comment(post_id):
         post.can_comment=True
         flash('Comment enabled','info')
     db.session.commit()
-    return redirect(url_for('blog.show_blog',post_id=post_id))
+    return redirect_back()
 
 @admin_bp.route('/comment/<int:comment_id>/delete', methods=['POST'])
 @login_required
